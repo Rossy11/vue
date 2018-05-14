@@ -16,7 +16,7 @@
 
     },
     mounted(){
-      this.$axios.get("http://14.119.109.232:30666/center/report/?cmd=income_info").then(res => {
+      this.$axios.get("xxxxxx").then(res => {
         let list = res.data.result.group;
         list.sort((a,b)=>{
           return b.index - a.index
