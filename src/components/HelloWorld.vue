@@ -31,7 +31,7 @@
       }
     },
     created: function () {
-      this.$axios.get("http://14.119.109.232:30666/UserInfo/").then(res => {
+      this.$axios.get("xxxxxx").then(res => {
         this.dataLength = res.data.length;
         this.tableData = res.data.slice(0, 3);
         this.allData = res.data;
