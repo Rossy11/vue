@@ -1,10 +1,11 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import login from '../login.vue'
-import Apps from '../App.vue'
-import HelloWorld from '../components/HelloWorld'
-import second from '../components/second'
-import detail from '../components/detail'
+//路由懒加载
+const login = resolve => require(['../login.vue'], resolve);
+const Apps = resolve => require(['../App.vue'], resolve);
+const HelloWorld = resolve => require(['../components/HelloWorld'], resolve);
+const second = resolve => require(['../components/second'], resolve);
+const detail = resolve => require(['../components/detail'], resolve);
 
 Vue.use(Router)
 

@@ -1,22 +1,39 @@
 <template>
   <div id="app" class="login_area">
     <div id="myChart" class="echarts"></div>
+    <button @click="initWebSocket">链接</button>
+    <button @click="websocketclose">断开</button>
+    <button @click="websocketsend">发消息</button>
+    <br>
+    <button @click="clickBtn">父组件传值到子组件</button>
+    <div>子组件穿过来的值：{{txt}}</div>
+    <child :fatherData="datas" @send="reviceSondata">
+      <p slot="my-header">我是头部</p>
+      <p slot="my-footer">我是尾部</p>
+    </child>
   </div>
 </template>
 
 <script>
+  import child from "./child.vue";
+
   export default {
     name: 'second',
+    components: {
+      child: child
+    },
     data () {
       return {
-
+        websock: null,
+        datas:"默认值",
+        txt:"默认值"
       }
     },
     created: function () {
 
     },
     mounted(){
-      this.$axios.get("xxxxxx").then(res => {
+      this.$axios.get("http://14.119.109.232:30666/center/report/?cmd=income_info").then(res => {
         let list = res.data.result.group;
         list.sort((a,b)=>{
           return b.index - a.index
@@ -31,6 +48,12 @@
       });
     },
     methods: {
+      clickBtn(){
+          this.datas="哈哈哈哈"
+      },
+      reviceSondata(e){
+          this.txt=e
+      },
       drawLine(time, datas){
         let myChart = this.$echarts.init(document.getElementById('myChart'));
         myChart.setOption({
@@ -100,12 +123,28 @@
             }
           ]
         });
+        window.onresize = myChart.resize;
+      },
+      initWebSocket(){ //初始化weosocket
+        //ws地址
+        let wsuri = "ws://14.119.109.232:8000/chat";
+        this.websock = new WebSocket(wsuri);
+        this.websock.onmessage = this.websocketonmessage;
+        this.websock.onclose = this.websocketclose;
+      },
+      websocketonmessage(e){ //数据接收
+        console.log(e);
+      },
+      websocketsend(agentData){//数据发送
+        this.websock.send("这是一个数据");
+      },
+      websocketclose(e){  //关闭
+        console.log("断开");
       }
     }
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .echarts{
   width: 700px;
