@@ -60,7 +60,7 @@
         this.setDatas(val);
       },
       setDatas(e){
-        this.$axios.get("http://14.119.109.232:30666/UserInfo/?page=" + e).then(res => {
+        this.$axios.get("xxx?page=" + e).then(res => {
           this.dataLength = res.data.count;
           this.tableData = res.data.results;
           console.log(res.data);
