@@ -1,6 +1,6 @@
 <template>
   <div id="apps">
-    <div class="top">乐野</div>
+    <div class="top">Rossy1</div>
     <div class="leftNav">
       <router-link to="/HelloWorld">链接一</router-link>
       <router-link to="/second">链接二</router-link>
