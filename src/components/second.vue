@@ -33,7 +33,7 @@
 
     },
     mounted(){
-      this.$axios.get("http://14.119.109.232:30666/center/report/?cmd=income_info").then(res => {
+      this.$axios.get("xxx/?cmd=income_info").then(res => {
         let list = res.data.result.group;
         list.sort((a,b)=>{
           return b.index - a.index
@@ -127,7 +127,7 @@
       },
       initWebSocket(){ //初始化weosocket
         //ws地址
-        let wsuri = "ws://14.119.109.232:8000/chat";
+        let wsuri = "xxx";
         this.websock = new WebSocket(wsuri);
         this.websock.onmessage = this.websocketonmessage;
         this.websock.onclose = this.websocketclose;
